@@ -1,45 +1,9 @@
-import { MapPin, Clock, Star, TrendingUp } from 'lucide-react';
+import { useState, useRef } from 'react';
+import { MapPin, Star, TrendingUp, ChevronLeft, ChevronRight } from 'lucide-react';
 import InquiryForm from './InquiryForm';
-import { ImageWithFallback } from '../figma/ImageWithFallback';
-
-const featuredDestinations = [
-  {
-    id: 1,
-    name: 'Tropical Paradise',
-    location: 'Maldives',
-    image: 'https://images.unsplash.com/photo-1603477849227-705c424d1d80?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx0cm9waWNhbCUyMGJlYWNoJTIwcGFyYWRpc2UlMjB2YWNhdGlvbnxlbnwxfHx8fDE3Nzk1MzM5MTF8MA&ixlib=rb-4.1.0&q=80&w=1080',
-    price: 1899,
-    duration: '5 Days / 4 Nights',
-    rating: 4.9,
-  },
-  {
-    id: 2,
-    name: 'Paris Romance',
-    location: 'Paris, France',
-    image: 'https://images.unsplash.com/photo-1511739001486-6bfe10ce785f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxlaWZmZWwlMjB0b3dlciUyMHBhcmlzJTIwdHJhdmVsfGVufDF8fHx8MTc3OTUzMzkxMXww&ixlib=rb-4.1.0&q=80&w=1080',
-    price: 2299,
-    duration: '6 Days / 5 Nights',
-    rating: 4.8,
-  },
-  {
-    id: 3,
-    name: 'Tokyo Adventure',
-    location: 'Tokyo, Japan',
-    image: 'https://images.unsplash.com/photo-1551322120-c697cf88fbdc?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwzfHx0b2t5byUyMGphcGFuJTIwc2t5bGluZXxlbnwxfHx8fDE3Nzk1MzM5MTJ8MA&ixlib=rb-4.1.0&q=80&w=1080',
-    price: 2599,
-    duration: '7 Days / 6 Nights',
-    rating: 4.9,
-  },
-  {
-    id: 4,
-    name: 'Island Escape',
-    location: 'Bali, Indonesia',
-    image: 'https://images.unsplash.com/photo-1672841828271-54340a6fbcd3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHw1fHx0cm9waWNhbCUyMGJlYWNoJTIwcGFyYWRpc2UlMjB2YWNhdGlvbnxlbnwxfHx8fDE3Nzk1MzM5MTF8MA&ixlib=rb-4.1.0&q=80&w=1080',
-    price: 1599,
-    duration: '8 Days / 7 Nights',
-    rating: 4.7,
-  },
-];
+import TravelPackageCard, { TravelPackage } from './TravelPackageCard';
+import TravelPackageModal from './TravelPackageModal';
+import { useTravelPackages } from '../../hooks/useTravelPackages';
 
 const promos = [
   {
@@ -57,6 +21,18 @@ const promos = [
 ];
 
 export default function HomePage() {
+  const { packages, loading, error } = useTravelPackages(1);
+  const [selectedPackage, setSelectedPackage] = useState<TravelPackage | null>(null);
+  const sliderRef = useRef<HTMLDivElement>(null);
+
+  const scrollLeft = () => {
+    sliderRef.current?.scrollBy({ left: -300, behavior: 'smooth' });
+  };
+
+  const scrollRight = () => {
+    sliderRef.current?.scrollBy({ left: 300, behavior: 'smooth' });
+  };
+
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
@@ -105,60 +81,60 @@ export default function HomePage() {
         </div>
       </div>
 
-      {/* Featured Destinations */}
+      {/* Travel Packages Swiper */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="text-center mb-12">
-          <h2 className="text-4xl mb-4">Best-Selling Destinations</h2>
-          <p className="text-xl text-muted-foreground">
-            Explore our most popular travel packages curated just for you
-          </p>
+        <div className="flex items-center justify-between mb-12">
+          <div>
+            <h2 className="text-4xl mb-4">Best-Selling Packages</h2>
+            <p className="text-xl text-muted-foreground">
+              Explore our most popular travel packages curated just for you
+            </p>
+          </div>
+          <div className="flex gap-2">
+            <button
+              onClick={scrollLeft}
+              className="p-2 rounded-lg border border-border hover:bg-secondary transition-colors"
+            >
+              <ChevronLeft className="w-5 h-5" />
+            </button>
+            <button
+              onClick={scrollRight}
+              className="p-2 rounded-lg border border-border hover:bg-secondary transition-colors"
+            >
+              <ChevronRight className="w-5 h-5" />
+            </button>
+          </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
-          {featuredDestinations.map((destination) => (
-            <div
-              key={destination.id}
-              className="bg-card border border-border rounded-lg overflow-hidden hover:shadow-xl transition-shadow group"
-            >
-              <div className="relative h-64 overflow-hidden">
-                <ImageWithFallback
-                  src={destination.image}
-                  alt={destination.name}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                />
-                <div className="absolute top-4 right-4 bg-white px-3 py-1 rounded-full shadow-lg">
-                  <div className="flex items-center gap-1">
-                    <Star className="w-4 h-4 text-yellow-500 fill-yellow-500" />
-                    <span className="text-sm font-medium">{destination.rating}</span>
-                  </div>
-                </div>
-              </div>
-              <div className="p-4">
-                <h3 className="mb-2">{destination.name}</h3>
-                <div className="flex items-center gap-2 text-sm text-muted-foreground mb-3">
-                  <MapPin className="w-4 h-4" />
-                  <span>{destination.location}</span>
-                </div>
-                <div className="flex items-center gap-2 text-sm text-muted-foreground mb-4">
-                  <Clock className="w-4 h-4" />
-                  <span>{destination.duration}</span>
-                </div>
-                <div className="flex items-center justify-between">
-                  <div>
-                    <span className="text-sm text-muted-foreground">From</span>
-                    <p className="text-2xl text-primary">${destination.price}</p>
-                  </div>
-                  <a
-                    href="/packages"
-                    className="px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:opacity-90 transition-opacity text-sm"
-                  >
-                    View Details
-                  </a>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
+        {error && (
+          <div className="bg-destructive/10 border border-destructive/20 text-destructive px-4 py-3 rounded-lg mb-6">
+            {error}
+          </div>
+        )}
+
+        {loading ? (
+          <div className="flex items-center justify-center py-20 text-muted-foreground">
+            Loading packages...
+          </div>
+        ) : packages.length === 0 ? (
+          <div className="flex items-center justify-center py-20 text-muted-foreground">
+            No packages available at the moment.
+          </div>
+        ) : (
+          <div
+            ref={sliderRef}
+            className="flex gap-6 overflow-x-auto pb-4 scroll-smooth"
+            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+          >
+            {packages.map((pkg) => (
+              <TravelPackageCard
+                key={pkg.id}
+                package={pkg}
+                onViewDetails={setSelectedPackage}
+              />
+            ))}
+          </div>
+        )}
       </div>
 
       {/* Inquiry Form Section */}
@@ -209,6 +185,14 @@ export default function HomePage() {
           </div>
         </div>
       </div>
+
+      {/* Package Modal */}
+      {selectedPackage && (
+        <TravelPackageModal
+          package={selectedPackage}
+          onClose={() => setSelectedPackage(null)}
+        />
+      )}
     </div>
   );
 }

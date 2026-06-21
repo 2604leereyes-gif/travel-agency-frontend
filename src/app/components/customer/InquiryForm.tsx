@@ -1,40 +1,59 @@
 import { useState } from 'react';
 import { User, Mail, Phone, MapPin, Calendar, Users, DollarSign, MessageSquare, Send } from 'lucide-react';
 import { toast } from 'sonner';
+import { API_ENDPOINTS } from '../../../config/api';
+
+const defaultForm = {
+  full_name: '',
+  email: '',
+  phone_number: '',
+  destination: '',
+  departure_date: '',
+  return_date: '',
+  number_of_travelers: 1,
+  estimated_budget: '',
+  notes: '',
+};
 
 export default function InquiryForm() {
-  const [formData, setFormData] = useState({
-    fullName: '',
-    email: '',
-    phone: '',
-    origin: '',
-    destination: '',
-    departureDate: '',
-    returnDate: '',
-    adults: '1',
-    children: '0',
-    infants: '0',
-    budget: '',
-    message: '',
-  });
+  const [formData, setFormData] = useState(defaultForm);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    toast.success('Your inquiry has been submitted! We\'ll contact you within 24 hours.');
-    setFormData({
-      fullName: '',
-      email: '',
-      phone: '',
-      origin: '',
-      destination: '',
-      departureDate: '',
-      returnDate: '',
-      adults: '1',
-      children: '0',
-      infants: '0',
-      budget: '',
-      message: '',
-    });
+    setLoading(true);
+    setError('');
+
+    try {
+      const res = await fetch(API_ENDPOINTS.inquiries, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          inquiry: {
+            full_name: formData.full_name,
+            email: formData.email,
+            phone_number: formData.phone_number || null,
+            destination: formData.destination || null,
+            departure_date: formData.departure_date || null,
+            return_date: formData.return_date || null,
+            number_of_travelers: formData.number_of_travelers,
+            estimated_budget: formData.estimated_budget || null,
+            notes: formData.notes || null,
+          },
+        }),
+      });
+
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Something went wrong');
+
+      toast.success("Your inquiry has been submitted! We'll contact you within 24 hours.");
+      setFormData(defaultForm);
+    } catch (err: any) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -50,27 +69,23 @@ export default function InquiryForm() {
         {/* Personal Information */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div>
-            <label htmlFor="fullName" className="block text-sm mb-2">
-              Full Name *
-            </label>
+            <label htmlFor="full_name" className="block text-sm mb-2">Full Name *</label>
             <div className="relative">
               <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
               <input
-                id="fullName"
+                id="full_name"
                 type="text"
-                value={formData.fullName}
-                onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
+                value={formData.full_name}
+                onChange={(e) => setFormData({ ...formData, full_name: e.target.value })}
                 className="w-full pl-10 pr-4 py-2 bg-input-background border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-ring text-sm"
-                placeholder="John Doe"
+                placeholder="Juan Dela Cruz"
                 required
               />
             </div>
           </div>
 
           <div>
-            <label htmlFor="email" className="block text-sm mb-2">
-              Email Address *
-            </label>
+            <label htmlFor="email" className="block text-sm mb-2">Email Address *</label>
             <div className="relative">
               <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
               <input
@@ -79,102 +94,70 @@ export default function InquiryForm() {
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                 className="w-full pl-10 pr-4 py-2 bg-input-background border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-ring text-sm"
-                placeholder="john@example.com"
+                placeholder="juan@example.com"
                 required
               />
             </div>
           </div>
 
           <div>
-            <label htmlFor="phone" className="block text-sm mb-2">
-              Phone Number *
-            </label>
+            <label htmlFor="phone_number" className="block text-sm mb-2">Phone Number</label>
             <div className="relative">
               <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
               <input
-                id="phone"
+                id="phone_number"
                 type="tel"
-                value={formData.phone}
-                onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                value={formData.phone_number}
+                onChange={(e) => setFormData({ ...formData, phone_number: e.target.value })}
                 className="w-full pl-10 pr-4 py-2 bg-input-background border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-ring text-sm"
-                placeholder="+1 (555) 000-0000"
-                required
+                placeholder="+63 912 345 6789"
               />
             </div>
           </div>
         </div>
 
-        {/* Travel Details */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div>
-            <label htmlFor="origin" className="block text-sm mb-2">
-              Flight Origin *
-            </label>
-            <div className="relative">
-              <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-              <input
-                id="origin"
-                type="text"
-                value={formData.origin}
-                onChange={(e) => setFormData({ ...formData, origin: e.target.value })}
-                className="w-full pl-10 pr-4 py-2 bg-input-background border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-ring text-sm"
-                placeholder="New York, USA"
-                required
-              />
-            </div>
-          </div>
-
-          <div>
-            <label htmlFor="destination" className="block text-sm mb-2">
-              Destination *
-            </label>
-            <div className="relative">
-              <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-              <input
-                id="destination"
-                type="text"
-                value={formData.destination}
-                onChange={(e) => setFormData({ ...formData, destination: e.target.value })}
-                className="w-full pl-10 pr-4 py-2 bg-input-background border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-ring text-sm"
-                placeholder="Bali, Indonesia"
-                required
-              />
-            </div>
+        {/* Destination */}
+        <div>
+          <label htmlFor="destination" className="block text-sm mb-2">Destination</label>
+          <div className="relative">
+            <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+            <input
+              id="destination"
+              type="text"
+              value={formData.destination}
+              onChange={(e) => setFormData({ ...formData, destination: e.target.value })}
+              className="w-full pl-10 pr-4 py-2 bg-input-background border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-ring text-sm"
+              placeholder="Batanes, Philippines"
+            />
           </div>
         </div>
 
         {/* Travel Dates */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <label htmlFor="departureDate" className="block text-sm mb-2">
-              Departure Date *
-            </label>
+            <label htmlFor="departure_date" className="block text-sm mb-2">Departure Date</label>
             <div className="relative">
               <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
               <input
-                id="departureDate"
+                id="departure_date"
                 type="date"
-                value={formData.departureDate}
-                onChange={(e) => setFormData({ ...formData, departureDate: e.target.value })}
+                value={formData.departure_date}
+                onChange={(e) => setFormData({ ...formData, departure_date: e.target.value })}
                 className="w-full pl-10 pr-4 py-2 bg-input-background border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-ring text-sm"
-                required
               />
             </div>
           </div>
 
           <div>
-            <label htmlFor="returnDate" className="block text-sm mb-2">
-              Return Date *
-            </label>
+            <label htmlFor="return_date" className="block text-sm mb-2">Return Date</label>
             <div className="relative">
               <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
               <input
-                id="returnDate"
+                id="return_date"
                 type="date"
-                value={formData.returnDate}
-                onChange={(e) => setFormData({ ...formData, returnDate: e.target.value })}
+                value={formData.return_date}
+                onChange={(e) => setFormData({ ...formData, return_date: e.target.value })}
                 className="w-full pl-10 pr-4 py-2 bg-input-background border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-ring text-sm"
-                required
               />
             </div>
           </div>
@@ -182,95 +165,66 @@ export default function InquiryForm() {
 
         {/* Number of Travelers */}
         <div>
-          <label className="block text-sm mb-2">
+          <label htmlFor="number_of_travelers" className="block text-sm mb-2">
             <Users className="inline w-4 h-4 mr-1" />
-            Number of Travelers *
+            Number of Travelers
           </label>
-          <div className="grid grid-cols-3 gap-4">
-            <div>
-              <label htmlFor="adults" className="block text-xs text-muted-foreground mb-1">
-                Adults (12+)
-              </label>
-              <input
-                id="adults"
-                type="number"
-                min="1"
-                value={formData.adults}
-                onChange={(e) => setFormData({ ...formData, adults: e.target.value })}
-                className="w-full px-4 py-2 bg-input-background border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-ring text-sm"
-                required
-              />
-            </div>
-            <div>
-              <label htmlFor="children" className="block text-xs text-muted-foreground mb-1">
-                Children (2-11)
-              </label>
-              <input
-                id="children"
-                type="number"
-                min="0"
-                value={formData.children}
-                onChange={(e) => setFormData({ ...formData, children: e.target.value })}
-                className="w-full px-4 py-2 bg-input-background border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-ring text-sm"
-              />
-            </div>
-            <div>
-              <label htmlFor="infants" className="block text-xs text-muted-foreground mb-1">
-                Infants (0-2)
-              </label>
-              <input
-                id="infants"
-                type="number"
-                min="0"
-                value={formData.infants}
-                onChange={(e) => setFormData({ ...formData, infants: e.target.value })}
-                className="w-full px-4 py-2 bg-input-background border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-ring text-sm"
-              />
-            </div>
-          </div>
+          <input
+            id="number_of_travelers"
+            type="number"
+            min="1"
+            value={formData.number_of_travelers}
+            onChange={(e) => setFormData({ ...formData, number_of_travelers: Number(e.target.value) })}
+            className="w-full px-4 py-2 bg-input-background border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-ring text-sm"
+          />
         </div>
 
-        {/* Budget */}
+        {/* Estimated Budget */}
         <div>
-          <label htmlFor="budget" className="block text-sm mb-2">
-            Estimated Budget (USD)
-          </label>
+          <label htmlFor="estimated_budget" className="block text-sm mb-2">Estimated Budget (₱)</label>
           <div className="relative">
             <DollarSign className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
             <input
-              id="budget"
-              type="text"
-              value={formData.budget}
-              onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
+              id="estimated_budget"
+              type="number"
+              min="0"
+              value={formData.estimated_budget}
+              onChange={(e) => setFormData({ ...formData, estimated_budget: e.target.value })}
               className="w-full pl-10 pr-4 py-2 bg-input-background border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-ring text-sm"
-              placeholder="e.g., $3000 - $5000"
+              placeholder="50000"
             />
           </div>
         </div>
 
-        {/* Special Requests */}
+        {/* Notes */}
         <div>
-          <label htmlFor="message" className="block text-sm mb-2">
+          <label htmlFor="notes" className="block text-sm mb-2">
             <MessageSquare className="inline w-4 h-4 mr-1" />
             Special Requests or Notes
           </label>
           <textarea
-            id="message"
-            value={formData.message}
-            onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+            id="notes"
+            value={formData.notes}
+            onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
             rows={4}
             className="w-full px-4 py-2 bg-input-background border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-ring resize-none text-sm"
-            placeholder="Tell us about any special requirements, hotel preferences, senior citizen needs, or specific activities you'd like to include..."
+            placeholder="Tell us about any special requirements, hotel preferences, or specific activities you'd like to include..."
           />
         </div>
 
-        {/* Submit Button */}
+        {error && (
+          <div className="bg-destructive/10 border border-destructive/20 text-destructive px-4 py-3 rounded-lg text-sm">
+            {error}
+          </div>
+        )}
+
         <button
           type="submit"
-          className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-primary text-primary-foreground rounded-lg hover:opacity-90 transition-opacity"
+          disabled={loading}
+          className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-primary text-primary-foreground rounded-lg hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed"
         >
           <Send className="w-5 h-5" />
-          <span>Submit Inquiry</span>
+          <span>{loading ? 'Submitting...' : 'Submit Inquiry'}</span>
         </button>
       </form>
     </div>

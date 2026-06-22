@@ -54,7 +54,7 @@ export default function HomePage() {
             </p>
             <a
               href="#inquiry"
-              className="inline-block px-8 py-4 bg-primary-foreground text-primary rounded-lg hover:opacity-90 transition-opacity text-lg"
+              className="inline-block px-8 py-4 bg-red-600 text-white font-medium rounded-lg hover:bg-red-700 transition-colors text-lg shadow-md"
             >
               Get Your Free Quote
             </a>

@@ -10,13 +10,13 @@ const promos = [
     id: 1,
     title: 'Summer Sale - Save 20%',
     description: 'Book any international package before June 30th!',
-    bgColor: 'bg-gradient-to-r from-chart-1/20 to-chart-2/20',
+    bgColor: 'bg-[#febf00]',
   },
   {
     id: 2,
     title: 'Early Bird Special',
     description: 'Reserve your 2027 trip now and get exclusive pricing.',
-    bgColor: 'bg-gradient-to-r from-chart-3/20 to-chart-4/20',
+    bgColor: 'bg-[#febf00]',
   },
 ];
 
@@ -68,12 +68,12 @@ export default function HomePage() {
           {promos.map((promo) => (
             <div key={promo.id} className={`${promo.bgColor} p-6 rounded-lg border border-border shadow-lg`}>
               <div className="flex items-start gap-3">
-                <div className="p-2 bg-primary/10 rounded-lg">
-                  <TrendingUp className="w-6 h-6 text-primary" />
+                <div className="p-2 bg-[#145889]/10 rounded-lg">
+                  <TrendingUp className="w-6 h-6 text-[#145889]" />
                 </div>
                 <div>
-                  <h3 className="mb-2">{promo.title}</h3>
-                  <p className="text-muted-foreground">{promo.description}</p>
+                  <h3 className="mb-2 font-semibold text-[#145889]">{promo.title}</h3>
+                  <p className="text-[#145889]/90 text-sm">{promo.description}</p>
                 </div>
               </div>
             </div>
@@ -141,12 +141,16 @@ export default function HomePage() {
       <div id="inquiry" className="bg-accent/30 py-16">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-8">
-            <h2 className="text-4xl mb-4">Plan Your Perfect Trip</h2>
-            <p className="text-xl text-muted-foreground">
+            <h2 className="text-4xl mb-4 text-[#145889]">Plan Your Perfect Trip</h2>
+            <p className="text-xl text-[#145889]/80">
               Fill out our quick inquiry form and let us create a personalized travel experience for you
             </p>
           </div>
-          <InquiryForm />
+
+          {/* Form Card: Exact same blue shade for background and text cascading down */}
+          <div className="bg-[#145889] text-[#145889] p-8 md:p-10 rounded-xl border border-border shadow-xl">
+            <InquiryForm />
+          </div>
         </div>
       </div>
 

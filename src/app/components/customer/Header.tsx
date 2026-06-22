@@ -9,7 +9,6 @@ export default function Header() {
     { label: 'Home', path: '/' },
     { label: 'Tour Packages', path: '/packages' },
     { label: 'About Us', path: '/about' },
-    { label: 'Partnership', path: '/partnership' },
     { label: 'Contact', path: '/contact' },
   ];
 
@@ -32,8 +31,7 @@ export default function Header() {
                 to={link.path}
                 end={link.path === '/'}
                 className={({ isActive }) =>
-                  `hover:text-primary transition-colors ${
-                    isActive ? 'text-primary font-medium' : 'text-foreground'
+                  `hover:text-primary transition-colors ${isActive ? 'text-primary font-medium' : 'text-foreground'
                   }`
                 }
               >
@@ -66,10 +64,9 @@ export default function Header() {
                   end={link.path === '/'}
                   onClick={() => setMobileMenuOpen(false)}
                   className={({ isActive }) =>
-                    `px-4 py-2 rounded-lg transition-colors ${
-                      isActive
-                        ? 'bg-primary/10 text-primary font-medium'
-                        : 'text-foreground hover:bg-accent'
+                    `px-4 py-2 rounded-lg transition-colors ${isActive
+                      ? 'bg-primary/10 text-primary font-medium'
+                      : 'text-foreground hover:bg-accent'
                     }`
                   }
                 >

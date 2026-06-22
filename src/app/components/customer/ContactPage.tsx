@@ -28,7 +28,7 @@ export default function ContactPage() {
       {/* Hero Section */}
       <div className="bg-gradient-to-br from-primary/10 to-accent/20 py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-5xl mb-6">Contact Us</h1>
+          <h1 className="text-5xl mb-6 text-[#145889] font-semibold">Contact Us</h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
             Have questions? We're here to help! Reach out to our friendly team and we'll respond as soon as possible.
           </p>
@@ -42,7 +42,7 @@ export default function ContactPage() {
             <div className="inline-flex items-center justify-center w-14 h-14 bg-chart-1/10 rounded-full mb-4">
               <MapPin className="w-7 h-7 text-chart-1" />
             </div>
-            <h3 className="mb-2">Office Address</h3>
+            <h3 className="text-[#145889] mb-2 font-semibold">Office Address</h3>
             <p className="text-muted-foreground text-sm">
               123 Travel Street<br />
               Suite 456<br />
@@ -55,7 +55,7 @@ export default function ContactPage() {
             <div className="inline-flex items-center justify-center w-14 h-14 bg-chart-2/10 rounded-full mb-4">
               <Phone className="w-7 h-7 text-chart-2" />
             </div>
-            <h3 className="mb-2">Phone Numbers</h3>
+            <h3 className="text-[#145889] mb-2 font-semibold">Phone Numbers</h3>
             <p className="text-muted-foreground text-sm">
               Main: +1 (555) 123-4567<br />
               Toll Free: 1-800-TRIPIE<br />
@@ -67,7 +67,7 @@ export default function ContactPage() {
             <div className="inline-flex items-center justify-center w-14 h-14 bg-chart-3/10 rounded-full mb-4">
               <Mail className="w-7 h-7 text-chart-3" />
             </div>
-            <h3 className="mb-2">Email Addresses</h3>
+            <h3 className="text-[#145889] mb-2 font-semibold">Email Addresses</h3>
             <p className="text-muted-foreground text-sm">
               General: info@tripietravel.com<br />
               Sales: sales@tripietravel.com<br />
@@ -79,7 +79,7 @@ export default function ContactPage() {
             <div className="inline-flex items-center justify-center w-14 h-14 bg-chart-4/10 rounded-full mb-4">
               <Clock className="w-7 h-7 text-chart-4" />
             </div>
-            <h3 className="mb-2">Business Hours</h3>
+            <h3 className="text-[#145889] mb-2 font-semibold">Business Hours</h3>
             <p className="text-muted-foreground text-sm">
               Monday - Friday<br />
               9:00 AM - 6:00 PM EST<br />
@@ -92,7 +92,7 @@ export default function ContactPage() {
         {/* Centralized Visit Our Office Section */}
         <div className="max-w-3xl mx-auto text-center">
           <div className="mb-6">
-            <h2 className="text-3xl mb-3">Visit Our Office</h2>
+            <h2 className="text-3xl mb-3 text-[#145889] font-semibold">Visit Our Office</h2>
             <p className="text-muted-foreground max-w-xl mx-auto">
               We'd love to meet you in person! Drop by our office or schedule an appointment.
             </p>
@@ -111,7 +111,7 @@ export default function ContactPage() {
                   href="https://maps.google.com"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-block mt-4 px-6 py-2 bg-primary text-primary-foreground rounded-lg hover:opacity-90 transition-opacity"
+                  className="inline-block mt-4 px-6 py-2 bg-[#145889] text-white rounded-lg hover:opacity-90 transition-opacity"
                 >
                   Open in Google Maps
                 </a>
@@ -122,38 +122,21 @@ export default function ContactPage() {
           {/* FAQ Quick Links */}
           <div className="bg-card border border-border rounded-lg p-6 max-w-md mx-auto text-center">
             <div className="flex items-center justify-center gap-3 mb-4">
-              <MessageSquare className="w-6 h-6 text-primary" />
-              <h3>Quick Help</h3>
+              <MessageSquare className="w-6 h-6 text-[#145889]" />
+              <h3 className="text-[#145889] font-semibold">Quick Help</h3>
             </div>
             <div className="space-y-3">
-              <a href="/#inquiry" className="block text-muted-foreground hover:text-primary transition-colors text-sm">
+              <a href="/#inquiry" className="block text-muted-foreground hover:text-[#145889] transition-colors text-sm">
                 → Get a travel quote
               </a>
-              <a href="/packages" className="block text-muted-foreground hover:text-primary transition-colors text-sm">
+              <a href="/packages" className="block text-muted-foreground hover:text-[#145889] transition-colors text-sm">
                 → Browse tour packages
               </a>
-              <a href="/partnership" className="block text-muted-foreground hover:text-primary transition-colors text-sm">
+              <a href="/partnership" className="block text-muted-foreground hover:text-[#145889] transition-colors text-sm">
                 → Partnership opportunities
               </a>
             </div>
           </div>
-        </div>
-      </div>
-
-      {/* Emergency Contact Banner */}
-      <div className="bg-destructive/10 border-t border-b border-destructive/20 py-8">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h3 className="mb-2 text-destructive">Emergency Travel Assistance</h3>
-          <p className="text-muted-foreground mb-4">
-            If you're currently traveling and need urgent assistance, our 24/7 emergency line is available.
-          </p>
-          <a
-            href="tel:+15559990000"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-destructive text-destructive-foreground rounded-lg hover:opacity-90 transition-opacity"
-          >
-            <Phone className="w-5 h-5" />
-            <span>Call Emergency Line: +1 (555) 999-0000</span>
-          </a>
         </div>
       </div>
     </div>

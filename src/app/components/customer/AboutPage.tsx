@@ -63,7 +63,7 @@ export default function AboutPage() {
                 <h3 className="text-2xl">Our Mission</h3>
               </div>
               <p className="text-muted-foreground">
-                To provide exceptional, personalized travel experiences that exceed our clients' expectations while promoting sustainable and responsible tourism. We strive to create journeys that not only showcase the beauty of our world but also foster cultural understanding and appreciation.
+We make great efforts to achieve or obtain to be the most professional and customer amenable travel consultants by using our knowledge, experience and contacts in order to serve our customers with tailormade solutions to all of your holiday needs. And be the world' s most trusted and innovative travel management company.
               </p>
             </div>
             <div className="bg-card border border-border rounded-lg p-8">

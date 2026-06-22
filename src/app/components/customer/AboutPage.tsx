@@ -63,7 +63,7 @@ export default function AboutPage() {
                 <h3 className="text-2xl">Our Mission</h3>
               </div>
               <p className="text-muted-foreground">
-We make great efforts to achieve or obtain to be the most professional and customer amenable travel consultants by using our knowledge, experience and contacts in order to serve our customers with tailormade solutions to all of your holiday needs. And be the world' s most trusted and innovative travel management company.
+                We make great efforts to achieve or obtain to be the most professional and customer amenable travel consultants by using our knowledge, experience and contacts in order to serve our customers with tailormade solutions to all of your holiday needs. And be the world' s most trusted and innovative travel management company.
               </p>
             </div>
             <div className="bg-card border border-border rounded-lg p-8">
@@ -74,8 +74,7 @@ We make great efforts to achieve or obtain to be the most professional and custo
                 <h3 className="text-2xl">Our Vision</h3>
               </div>
               <p className="text-muted-foreground">
-                To become the most trusted travel partner for adventurers, families, and business travelers worldwide. We envision a future where travel connects people, cultures, and communities, making the world a smaller, more understanding place one journey at a time.
-              </p>
+                Helping people and companies travel smart and achieve more. Serving our customer, searching their entire satisfaction and providing touristic services of quality, committing to the social, cultural and environmental reality of our country.
             </div>
           </div>
         </div>

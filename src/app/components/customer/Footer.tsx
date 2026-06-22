@@ -57,7 +57,7 @@ export default function Footer() {
             </p>
             <div className="flex gap-3">
               <a
-                href="https://facebook.com"
+                href="https://www.facebook.com/tripietravelandtours/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-2 bg-white/10 hover:bg-white/20 rounded-lg transition-colors"
@@ -66,7 +66,7 @@ export default function Footer() {
                 <Facebook className="w-5 h-5" />
               </a>
               <a
-                href="https://instagram.com"
+                href="https://www.instagram.com/tripietravelandtours/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-2 bg-white/10 hover:bg-white/20 rounded-lg transition-colors"
@@ -75,7 +75,7 @@ export default function Footer() {
                 <Instagram className="w-5 h-5" />
               </a>
               <a
-                href="https://tiktok.com"
+                href="https://www.tiktok.com/@tripietravelandtours"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-2 bg-white/10 hover:bg-white/20 rounded-lg transition-colors"
@@ -98,11 +98,6 @@ export default function Footer() {
               <li>
                 <a href="/about" className="hover:text-white transition-colors">
                   About Us
-                </a>
-              </li>
-              <li>
-                <a href="/partnership" className="hover:text-white transition-colors">
-                  Partnership Opportunities
                 </a>
               </li>
               <li>

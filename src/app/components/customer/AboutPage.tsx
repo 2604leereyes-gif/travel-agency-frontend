@@ -75,6 +75,7 @@ export default function AboutPage() {
               </div>
               <p className="text-muted-foreground">
                 Helping people and companies travel smart and achieve more. Serving our customer, searching their entire satisfaction and providing touristic services of quality, committing to the social, cultural and environmental reality of our country.
+              </p>
             </div>
           </div>
         </div>

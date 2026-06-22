@@ -8,7 +8,7 @@ export default function AboutPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-5xl mb-6">About Tripie Travel & Tours</h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Creating unforgettable travel experiences and turning your dream vacations into reality since 2014
+            Creating unforgettable travel experiences and turning your dream vacations into reality since 2017
           </p>
         </div>
       </div>
@@ -19,15 +19,22 @@ export default function AboutPage() {
           <div>
             <h2 className="text-4xl mb-6">Our Story</h2>
             <div className="space-y-4 text-muted-foreground">
-              <p>
-                Tripie Travel & Tours was founded in 2014 with a simple yet powerful vision: to make world-class travel experiences accessible to everyone. What started as a small travel agency with just three passionate travel enthusiasts has grown into a trusted name in the tourism industry.
-              </p>
-              <p>
-                Over the years, we've helped thousands of travelers discover the beauty of destinations around the globe. From pristine beaches to bustling cities, from serene mountains to vibrant cultural hotspots, we've curated experiences that create lasting memories.
-              </p>
-              <p>
-                Our team of dedicated travel experts brings decades of combined experience in crafting personalized itineraries, negotiating the best rates, and ensuring every detail of your journey is perfectly planned.
-              </p>
+              <p> Tripie Travel and Tours was established and registered as a business in
+              September 2017 due to growing demands. In 2019, we kept moving forward
+              to support our partners and clients in surviving and growing their
+              businesses amid the crisis.</p> 
+
+              <p> As a growing travel agency, we cater to the needs of travelers who want to
+              enjoy the natural beauty of other countries and tourist spots here in the
+              Philippines. As well as catering for business purposes and companies.</p> 
+
+              <p> Tripie Travel and Tours is a trusted partner for incentive activities with
+              business partners. We are ready to serve our customers’ travel needs, both
+              inbound and outbound tours. </p> 
+
+              <p> It is a part of our commitment to keep maintaining and improving our
+              services, customer satisfaction, and customer confidence.</p> 
+
             </div>
           </div>
           <div className="grid grid-cols-2 gap-4">
@@ -63,7 +70,7 @@ export default function AboutPage() {
                 <h3 className="text-2xl">Our Mission</h3>
               </div>
               <p className="text-muted-foreground">
-                To provide exceptional, personalized travel experiences that exceed our clients' expectations while promoting sustainable and responsible tourism. We strive to create journeys that not only showcase the beauty of our world but also foster cultural understanding and appreciation.
+                We make great efforts to achieve or obtain to be the most professional and customer amenable travel consultants by using our knowledge, experience and contacts in order to serve our customers with tailormade solutions to all of your holiday needs. And be the world' s most trusted and innovative travel management company.
               </p>
             </div>
             <div className="bg-card border border-border rounded-lg p-8">
@@ -74,7 +81,7 @@ export default function AboutPage() {
                 <h3 className="text-2xl">Our Vision</h3>
               </div>
               <p className="text-muted-foreground">
-                To become the most trusted travel partner for adventurers, families, and business travelers worldwide. We envision a future where travel connects people, cultures, and communities, making the world a smaller, more understanding place one journey at a time.
+                Helping people and companies travel smart and achieve more. Serving our customer, searching their entire satisfaction and providing touristic services of quality, committing to the social, cultural and environmental reality of our country.
               </p>
             </div>
           </div>

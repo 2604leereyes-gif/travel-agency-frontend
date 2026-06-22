@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Plane, Mail, Facebook, Instagram, Send } from 'lucide-react';
+import { Mail, Facebook, Instagram } from 'lucide-react';
 import { toast } from 'sonner';
 import { API_ENDPOINTS } from '../../../config/api';
 
@@ -44,12 +44,15 @@ export default function Footer() {
     <footer className="bg-[#145889] text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
-          {/* Brand Section */}
+          
+          {/* --- UPDATED BRAND SECTION --- */}
           <div>
-            <div className="flex items-center gap-2 mb-4">
-              <div className="bg-white/10 rounded-full p-2">
-                <Plane className="w-6 h-6" />
-              </div>
+            <div className="flex items-center gap-3 mb-4">
+              <img 
+                src="https://cdn.corenexis.com/f/DurqoCE1E5t.png" 
+                alt="Tripie Travel & Tours Logo" 
+                className="h-10 w-auto object-contain" 
+              />
               <span className="text-xl font-semibold">Tripie Travel & Tours</span>
             </div>
             <p className="text-white/80 mb-4">
@@ -78,10 +81,22 @@ export default function Footer() {
                 href="https://www.tiktok.com/@tripietravelandtours"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2 bg-white/10 hover:bg-white/20 rounded-lg transition-colors"
+                className="p-2 bg-white/10 hover:bg-white/20 rounded-lg transition-colors flex items-center justify-center"
                 aria-label="TikTok"
               >
-                <Send className="w-5 h-5" />
+                {/* --- UPDATED TIKTOK SVG ICON --- */}
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="w-5 h-5"
+                >
+                  <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5v3a3 3 0 0 1-3-3v7a6 6 0 1 1-6-6v3a3 3 0 0 0 3 3z" />
+                </svg>
               </a>
             </div>
           </div>

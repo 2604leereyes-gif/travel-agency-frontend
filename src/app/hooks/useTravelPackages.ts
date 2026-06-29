@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { TravelPackage } from '../components/customer/TravelPackageCard';
 import { API_ENDPOINTS } from '../../config/api';
+import { createHeadersNoAuth } from '../../config/header';
 
 interface Meta {
   current_page: number;
@@ -19,7 +20,9 @@ export function useTravelPackages(page = 1) {
       setLoading(true);
       setError('');
       try {
-        const res = await fetch(`${API_ENDPOINTS.clientTravelPackages}?page=${page}`);
+        const res = await fetch(`${API_ENDPOINTS.clientTravelPackages}?page=${page}`, {
+          headers: createHeadersNoAuth()
+        });
         const data = await res.json();
         if (!res.ok) throw new Error(data.error || 'Failed to fetch packages');
         setPackages(data.travel_packages);

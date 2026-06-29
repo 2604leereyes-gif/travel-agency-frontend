@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { User, Mail, Phone, MapPin, Calendar, Users, DollarSign, MessageSquare, Send } from 'lucide-react';
 import { toast } from 'sonner';
 import { API_ENDPOINTS } from '../../../config/api';
+import { createHeadersNoAuth } from '../../../config/header';
 
 const defaultForm = {
   full_name: '',
@@ -28,7 +29,7 @@ export default function InquiryForm() {
     try {
       const res = await fetch(API_ENDPOINTS.inquiries, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: createHeadersNoAuth(),
         body: JSON.stringify({
           inquiry: {
             full_name: formData.full_name,

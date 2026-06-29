@@ -3,7 +3,7 @@ import { API_ENDPOINTS } from '../../config/api';
 import { auth } from '../../config/auth';
 import * as ActionCable from '@rails/actioncable';
 import { WS_ENDPOINT } from "../../config/api";
-
+import { createHeaders } from "../../config/header"
 export interface Subscriber {
   id: number;
   email: string;
@@ -50,9 +50,7 @@ export function useAdminSubscribers(page = 1, search = '') {
         }
 
         const response = await fetch(API_ENDPOINTS.adminSubscribers(page, search), {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+          headers: createHeaders(),
         });
 
         const data = await response.json();

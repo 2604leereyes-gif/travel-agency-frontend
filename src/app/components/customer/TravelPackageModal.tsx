@@ -3,6 +3,7 @@ import { MapPin, Users, DollarSign, User, Mail, Phone, MessageSquare, Send, Arro
 import { toast } from 'sonner';
 import { TravelPackage } from './TravelPackageCard';
 import { API_ENDPOINTS, getImageSrc } from '../../../config/api';
+import { createHeadersNoAuth } from '../../../config/header';
 
 interface Props {
   package: TravelPackage;
@@ -31,7 +32,7 @@ export default function TravelPackageModal({ package: pkg, onClose }: Props) {
     try {
       const res = await fetch(API_ENDPOINTS.clientTravelPackageInquire(pkg.id), {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: createHeadersNoAuth(),
         body: JSON.stringify({ inquiry: formData }),
       });
 

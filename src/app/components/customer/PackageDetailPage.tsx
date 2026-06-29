@@ -15,6 +15,7 @@ import {
 import { toast } from 'sonner';
 import { API_ENDPOINTS, getImageSrc } from '../../../config/api';
 import { TravelPackage } from './TravelPackageCard';
+import { createHeadersNoAuth } from '../../../config/header';
 
 const defaultForm = {
   full_name: '',
@@ -41,7 +42,9 @@ export default function PackageDetailPage() {
       setError('');
 
       try {
-        const res = await fetch(API_ENDPOINTS.clientTravelPackage(Number(params.id)));
+        const res = await fetch(API_ENDPOINTS.clientTravelPackage(Number(params.id)), {
+          headers: createHeadersNoAuth(),
+        });
         const data = await res.json();
         if (!res.ok) throw new Error(data.error || 'Failed to load package');
         setTravelPackage(data.travel_package ?? data);
@@ -65,7 +68,7 @@ export default function PackageDetailPage() {
     try {
       const res = await fetch(API_ENDPOINTS.clientTravelPackageInquire(travelPackage.id), {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: createHeadersNoAuth(),
         body: JSON.stringify({
           inquiry: {
             full_name: formData.full_name,

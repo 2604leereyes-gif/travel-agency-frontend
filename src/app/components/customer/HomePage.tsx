@@ -5,6 +5,7 @@ import InquiryForm from './InquiryForm';
 import TravelPackageCard from './TravelPackageCard';
 import { useTravelPackages } from '../../hooks/useTravelPackages';
 import { API_ENDPOINTS } from '../../../config/api';
+import { createHeadersNoAuth } from '../../../config/header';
 
 interface Promo {
   id: number;
@@ -22,7 +23,9 @@ export default function HomePage() {
   useEffect(() => {
     const fetchPromos = async () => {
       try {
-        const response = await fetch(API_ENDPOINTS.clientPromos());
+        const response = await fetch(API_ENDPOINTS.clientPromos(), , {
+          headers: createHeadersNoAuth(), // or true depending on your logic
+        });
         const data = await response.json();
         if (!response.ok) throw new Error(data.error || 'Failed to load promos');
         setPromos(data.promos || []);

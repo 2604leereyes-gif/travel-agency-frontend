@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Mail, Facebook, Instagram } from 'lucide-react';
 import { toast } from 'sonner';
 import { API_ENDPOINTS } from '../../../config/api';
+import { createHeadersNoAuth } from '../../../config/header';
 
 export default function Footer() {
   const [name, setName] = useState('');
@@ -15,7 +16,7 @@ export default function Footer() {
     try {
       const response = await fetch(API_ENDPOINTS.createSubscriber, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: createHeadersNoAuth(),
         body: JSON.stringify({
           email,
           ...(name.trim() ? { name: name.trim() } : {}),

@@ -23,7 +23,7 @@ export default function HomePage() {
   useEffect(() => {
     const fetchPromos = async () => {
       try {
-        const response = await fetch(API_ENDPOINTS.clientPromos(), , {
+        const response = await fetch(API_ENDPOINTS.clientPromos(), {
           headers: createHeadersNoAuth(), // or true depending on your logic
         });
         const data = await response.json();
